@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -22,21 +24,19 @@ public class Menu extends JFrame{
 	private JPanel panelPrincipal;
 	private JTextField nameInput;
 	private HashSet<Persona> personas;
-	private ArrayList<String> nombres;
 	private JComboBox<String> comboBoxDeportes;
 	private JComboBox<String> comboBoxMusica;
 	private JComboBox<String> comboBoxFarandula;
 	private JComboBox<String> comboBoxCiencias;
+	private static DefaultListModel<String> listModel;
 	
 	public Menu() {
 		setTitle("TP2: Clustering Humano");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200,200,600,450);
 		String[] niveles = {"1", "2", "3", "4", "5"};
-		//ArrayList<String> nombres = new ArrayList<>();
-		personas = new HashSet<>();
-		nombres = new ArrayList<String>();
-		
+		personas = new HashSet<Persona>();
+		ArrayList<String> nombres = new ArrayList<>();	
 		
 		panelPrincipal=new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5,5,5,5));
@@ -79,6 +79,14 @@ public class Menu extends JFrame{
 		comboBoxCiencias = new JComboBox<>(niveles);
 		comboBoxCiencias.setBounds(204, 141, 44, 22);
 		panelPrincipal.add(comboBoxCiencias);
+
+		listModel = new DefaultListModel<>();
+        for (String nombre : nombres) {
+            listModel.addElement(nombre);
+        }
+        JList<String> listaNombres = new JList<>(listModel);
+		listaNombres.setBounds(372, 27, 183, 314);
+		panelPrincipal.add(listaNombres);
 		
 		JButton calcularGruposButton = new JButton("Calcular Grupos");
 		calcularGruposButton.addActionListener(new ActionListener() {
@@ -91,10 +99,6 @@ public class Menu extends JFrame{
 		calcularGruposButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		calcularGruposButton.setBounds(32, 287, 216, 74);
 		panelPrincipal.add(calcularGruposButton);
-
-        JList<String> listaNombres = new JList<>(nombres.toArray(new String[nombres.size()]));
-		listaNombres.setBounds(372, 27, 183, 314);
-		panelPrincipal.add(listaNombres);
 		
 		JButton agregarPersonaButton = new JButton("Agregar persona");
 		agregarPersonaButton.addActionListener(new ActionListener() {
@@ -109,12 +113,12 @@ public class Menu extends JFrame{
 						Integer.parseInt((String) comboBoxFarandula.getSelectedItem()),
 						Integer.parseInt((String) comboBoxCiencias.getSelectedItem()));
 				personas.add(nuevaPersona);
-				nombres.add(nuevaPersona.consultarNombre());
+				listModel.addElement(nuevaPersona.consultarNombre());
 				panelPrincipal.revalidate();
 				panelPrincipal.repaint();
 				}
 			}
-			private boolean validateName(String nombre, ArrayList<String> lista) {
+			private boolean validateName(String nombre, List<String> lista) {
 				if (nombre.length() > 10 || nombre == null || nombre.trim().isEmpty()) {
 					return false;
 				}
