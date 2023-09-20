@@ -1,6 +1,10 @@
 package user_gui;
 
 import logic.Persona;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,128 +14,139 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import java.awt.Color;
+import java.awt.Rectangle;
 
-public class Menu extends JFrame{
+public class Menu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPrincipal;
 	private JTextField nameInput;
-	private HashSet<Persona> personas;
+	private ArrayList<Persona> personas;
 	private JComboBox<String> comboBoxDeportes;
 	private JComboBox<String> comboBoxMusica;
 	private JComboBox<String> comboBoxFarandula;
 	private JComboBox<String> comboBoxCiencias;
 	private static DefaultListModel<String> listModel;
-	
+
 	public Menu() {
 		setTitle("TP2: Clustering Humano");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200,200,600,450);
-		String[] niveles = {"1", "2", "3", "4", "5"};
-		personas = new HashSet<Persona>();
-		ArrayList<String> nombres = new ArrayList<>();	
+		setSize(600, 450);
+		setLocationRelativeTo(null);
+		String[] niveles = { "1", "2", "3", "4", "5" };
+		personas = new ArrayList<Persona>();
 		
-		panelPrincipal=new JPanel();
-		panelPrincipal.setBorder(new EmptyBorder(5,5,5,5));
+
+		panelPrincipal = new JPanel();
+		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal);
 		panelPrincipal.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(32, 14, 120, 14);
-		panelPrincipal.add(lblNewLabel);
+		JLabel lblNewLabel_5 = new JLabel("Aguilar, Pardo, Roca Vilte");
+		lblNewLabel_5.setBounds(218, 386, 169, 14);
+		panelPrincipal.add(lblNewLabel_5);
 		
+		JLabel lblNewLabel = new JLabel("Nombre");
+		lblNewLabel.setBounds(62, 35, 85, 14);
+		panelPrincipal.add(lblNewLabel);
 		nameInput = new JTextField();
-		nameInput.setBounds(162, 11, 86, 20);
+		nameInput.setBounds(164, 32, 86, 20);
 		panelPrincipal.add(nameInput);
 		nameInput.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Interes en Deportes");
-		lblNewLabel_1.setBounds(32, 46, 127, 14);
+		lblNewLabel_1.setBounds(62, 63, 122, 14);
 		panelPrincipal.add(lblNewLabel_1);
 		comboBoxDeportes = new JComboBox<>(niveles);
-		comboBoxDeportes.setBounds(204, 42, 44, 22);
+		comboBoxDeportes.setBounds(218, 63, 32, 20);
 		panelPrincipal.add(comboBoxDeportes);
 
 		JLabel lblNewLabel_2 = new JLabel("Interes en Musica");
-		lblNewLabel_2.setBounds(32, 79, 127, 14);
+		lblNewLabel_2.setBounds(62, 99, 122, 14);
 		panelPrincipal.add(lblNewLabel_2);
 		comboBoxMusica = new JComboBox<>(niveles);
-		comboBoxMusica.setBounds(204, 75, 44, 22);
+		comboBoxMusica.setBounds(218, 96, 32, 20);
 		panelPrincipal.add(comboBoxMusica);
 
 		JLabel lblNewLabel_3 = new JLabel("Interes en Farandula");
-		lblNewLabel_3.setBounds(32, 112, 127, 14);
+		lblNewLabel_3.setBounds(62, 134, 122, 14);
 		panelPrincipal.add(lblNewLabel_3);
 		comboBoxFarandula = new JComboBox<>(niveles);
-		comboBoxFarandula.setBounds(204, 108, 44, 22);
+		comboBoxFarandula.setBounds(218, 164, 32, 20);
 		panelPrincipal.add(comboBoxFarandula);
 
 		JLabel lblNewLabel_4 = new JLabel("Interes en Ciencias");
-		lblNewLabel_4.setBounds(32, 145, 127, 14);
+		lblNewLabel_4.setBounds(62, 167, 122, 14);
 		panelPrincipal.add(lblNewLabel_4);
 		comboBoxCiencias = new JComboBox<>(niveles);
-		comboBoxCiencias.setBounds(204, 141, 44, 22);
+		comboBoxCiencias.setBounds(218, 131, 32, 20);
 		panelPrincipal.add(comboBoxCiencias);
-
-		listModel = new DefaultListModel<>();
-        for (String nombre : nombres) {
-            listModel.addElement(nombre);
-        }
-        JList<String> listaNombres = new JList<>(listModel);
-		listaNombres.setBounds(372, 27, 183, 314);
-		panelPrincipal.add(listaNombres);
 		
 		JButton calcularGruposButton = new JButton("Calcular Grupos");
-		calcularGruposButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for (String nombre : nombres) {
-		            System.out.println("\n"+nombre);
-		        }
-			}
-		});
-		calcularGruposButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		calcularGruposButton.setBounds(32, 287, 216, 74);
-		panelPrincipal.add(calcularGruposButton);
+		calcularGruposButton.setBounds(62, 280, 200, 56);
+		//		calcularGruposButton.addActionListener(new ActionListener() {
+		//			public void actionPerformed(ActionEvent e) {
+		//				for (String nombre : nombres) {
+		//		            System.out.println("\n"+nombre);
+		//		        }
+		//			}
+		//		});
+				calcularGruposButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+				panelPrincipal.add(calcularGruposButton);
+
 		
+		
+		listModel = new DefaultListModel<>();
+		for (Persona per : personas) {
+			listModel.addElement(per.consultarNombre());
+		}
+		JList<String> listaNombres = new JList<>(listModel);
+		listaNombres.setBounds(355, 23, 200, 313);
+		panelPrincipal.add(listaNombres);
+//		JScrollPane scrollPane = new JScrollPane(listaNombres);
+//		add(scrollPane);
+		
+
 		JButton agregarPersonaButton = new JButton("Agregar persona");
+		agregarPersonaButton.setBounds(62, 227, 142, 42);
 		agregarPersonaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!validateName(nameInput.getText(),nombres)) {
-					JOptionPane.showMessageDialog(null, "El nombre no puede ser vacio, mayor a 10 caracteres o ya estar registrado", 
-												"Error al iniciar ", JOptionPane.INFORMATION_MESSAGE);
-				}else {
-				Persona nuevaPersona = new Persona(nameInput.getText(),
-						Integer.parseInt((String) comboBoxDeportes.getSelectedItem()),
-						Integer.parseInt((String) comboBoxMusica.getSelectedItem()),
-						Integer.parseInt((String) comboBoxFarandula.getSelectedItem()),
-						Integer.parseInt((String) comboBoxCiencias.getSelectedItem()));
-				personas.add(nuevaPersona);
-				listModel.addElement(nuevaPersona.consultarNombre());
-				panelPrincipal.revalidate();
-				panelPrincipal.repaint();
+				if (!validateName(nameInput.getText(), personas)) {
+					JOptionPane.showMessageDialog(null,
+							"El nombre no puede ser vacio, mayor a 10 caracteres o ya estar registrado",
+							"Error al agregar persona ", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					Persona nuevaPersona = new Persona(nameInput.getText(),
+							Integer.parseInt((String) comboBoxDeportes.getSelectedItem()),
+							Integer.parseInt((String) comboBoxMusica.getSelectedItem()),
+							Integer.parseInt((String) comboBoxFarandula.getSelectedItem()),
+							Integer.parseInt((String) comboBoxCiencias.getSelectedItem()));
+					personas.add(nuevaPersona);
+					listModel.addElement(nuevaPersona.toString());
+					nameInput.setText("");
 				}
 			}
-			private boolean validateName(String nombre, List<String> lista) {
+
+			private boolean validateName(String nombre, ArrayList<Persona> lista) {
 				if (nombre.length() > 10 || nombre == null || nombre.trim().isEmpty()) {
 					return false;
 				}
-				for (String elemento : lista) {
-		            if (elemento.equals(nombre)) {
-		                return false;
-		            }
-		        }
+				for (Persona elemento : lista) {
+					if (elemento.consultarNombre().toLowerCase().equals(nombre.toLowerCase())) {
+						return false;
+					}
+				}
 				return true;
 			}
 		});
-		agregarPersonaButton.setBounds(32, 212, 139, 23);
 		panelPrincipal.add(agregarPersonaButton);
+		
 		
 		
 	}
