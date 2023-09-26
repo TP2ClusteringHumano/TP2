@@ -1,21 +1,21 @@
 package logic;
 
 public class Arista {
-	private int origen;
-	private int destino;
+	private Persona origen;
+	private Persona destino;
 	private int peso;
 
-	public Arista(int origen, int destino, int peso) {
+	public Arista(Persona origen, Persona destino, int peso) {
 		this.origen = origen;
 		this.destino = destino;
 		this.peso = peso;
 	}
 
-	public int getOrigen() {
+	public Persona getOrigen() {
 		return origen;
 	}
 
-	public int getDestino() {
+	public Persona getDestino() {
 		return destino;
 	}
 

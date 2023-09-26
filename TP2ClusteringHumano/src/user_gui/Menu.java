@@ -96,25 +96,25 @@ public class Menu extends JFrame {
 
 		JButton calcularGruposButton = new JButton("Calcular Grupos");
 		calcularGruposButton.setBounds(62, 280, 200, 56);
-		calcularGruposButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (personas.size() < 2) {
-					JOptionPane.showMessageDialog(null, "Por favor agregue mas personas para calcular los grupos",
-							"Error al generar grupos ", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-
-					Grafo grafo = new Grafo(0);
-					for (Persona p : personas) {
-						grafo.agregarPersona(p);
-					dispose();
-					Display display = new Display(grafo);
-					display.setResizable(false);
-					display.setVisible(true);
-					display.setLocationRelativeTo(null);
-					}
-				}
-			}
-		});
+//		calcularGruposButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if (personas.size() < 2) {
+//					JOptionPane.showMessageDialog(null, "Por favor agregue mas personas para calcular los grupos",
+//							"Error al generar grupos ", JOptionPane.INFORMATION_MESSAGE);
+//				} else {
+//
+//					Grafo grafo = new Grafo(0);
+//					for (Persona p : personas) {
+//						grafo.agregarPersona(p);
+//					dispose();
+//					Display display = new Display(grafo);
+//					display.setResizable(false);
+//					display.setVisible(true);
+//					display.setLocationRelativeTo(null);
+//					}
+//				}
+//			}
+//		});
 		calcularGruposButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelPrincipal.add(calcularGruposButton);
 
